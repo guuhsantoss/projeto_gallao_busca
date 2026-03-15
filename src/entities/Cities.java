@@ -25,7 +25,7 @@ public class Cities {
 	public List<Vertices> getList(){
 		return list;
 	}
-	
+
 	public void addList(Vertices vertices) {
 		list.add(vertices);
 	}
