@@ -24,7 +24,7 @@ public class Program {
 			String partida = sc.next();
 			System.out.println("Escreva a cidade de DESTINO: ");
 			String destino = sc.next();
-
+			System.out.println();
 
 
 		} catch (Exception e) {
