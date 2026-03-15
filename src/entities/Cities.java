@@ -22,9 +22,12 @@ public class Cities {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public List<Vertices> getList(){
+		return list;
+	}
 	
-	public void addList(Vertices v) {
-		list.add(v);
+	public void addList(Vertices vertices) {
+		list.add(vertices);
 	}
 	
 }
