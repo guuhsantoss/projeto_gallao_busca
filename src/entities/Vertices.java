@@ -5,8 +5,9 @@ public class Vertices {
 	private Integer distance;
 	private Boolean teste;
 	
-	public Vertices() {
-		
+	public Vertices(String name, Integer distance) {
+		this.name = name;
+		this.distance = distance;
 	}
 
 	public String getName() {
@@ -33,6 +34,10 @@ public class Vertices {
 		this.teste = teste;
 	}
 	
+	@Override
+	public String toString(){
+		return name + " " + distance;
+	}
 	
 	
 }
