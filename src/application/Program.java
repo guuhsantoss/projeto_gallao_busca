@@ -3,29 +3,41 @@ package application;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import entities.Cities;
 import entities.Vertices;
 
 public class Program {
-	public static void main(String[] args) {
-		List<Cities> list = new ArrayList<>();
+	public static void main(String[] args) {;
 		Scanner sc = new Scanner(System.in);
 		try {
-			list = readArchive(); // metodo para ler o arquivo e retornar uma lista
-			for (Cities cities : list) {
-				System.out.println(cities.getName());
-			}
+			Map<String, Cities> map = readArchive(); // metodo para ler o arquivo e retornar uma lista
+
 			System.out.println();
 			System.out.println("Escreva a cidade de PARTIDA: ");
 			String partida = sc.next();
 			System.out.println("Escreva a cidade de DESTINO: ");
 			String destino = sc.next();
 			System.out.println();
-
+			
+			System.out.println(partida);
+			Cities c = map.get(partida);
+			
+			while(!map.isEmpty()) {
+				System.out.println(c.getName());
+				String nextCity = c.getList().getFirst().getName();
+				for(Vertices v : c.getList()) {
+					System.out.println(v.getName());
+				}
+				c.removeList(c.getList().getFirst());
+				if(c.getList().isEmpty()) {
+					map.remove(c);
+				}
+				c = map.get(nextCity);		
+			}
 
 		} catch (Exception e) {
 			System.out.println("Deu ruim na leitura");
@@ -72,10 +84,10 @@ public class Program {
 		}
 	}
 
-	public static List<Cities> readArchive() throws IOException {
+	public static Map<String, Cities> readArchive() throws IOException {
 
 		BufferedReader br = new BufferedReader(new FileReader("src/application/Gallao.txt")); 
-			List<Cities> list = new ArrayList<>();
+			Map<String, Cities> map = new HashMap<>();
 			String line;
 			String[] name, distance;
 			while ((line = br.readLine()) != null) {
@@ -90,8 +102,9 @@ public class Program {
 						c.addList(vertices);
 					}
 				}
-				list.add(c);
+				map.put(name[0], c);
 			}
-			return list;
+			return map;
 	}
+	//public static List<Cities> bfs()
 }

@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Cities {
@@ -28,6 +29,11 @@ public class Cities {
 
 	public void addList(Vertices vertices) {
 		list.add(vertices);
+		list.sort(Comparator.comparing(Vertices::getDistance));;
+	}
+	
+	public void removeList(Vertices vertices) {
+		list.remove(vertices);
 	}
 	
 }
