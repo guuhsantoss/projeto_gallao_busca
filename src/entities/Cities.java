@@ -26,6 +26,12 @@ public class Cities {
 	public List<Vertices> getList(){
 		return list;
 	}
+	public Vertices getVertice(String nomeBusca){
+		return list.stream()
+				   .filter(v -> v.getName().equalsIgnoreCase(nomeBusca))
+				   .findFirst()
+				   .orElse(null);
+	}
 
 	public void addList(Vertices vertices) {
 		list.add(vertices);

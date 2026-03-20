@@ -23,20 +23,17 @@ public class Program {
 			String destino = sc.next();
 			System.out.println();
 			
-			System.out.println(partida);
 			Cities c = map.get(partida);
 			
-			while(!map.isEmpty()) {
-				System.out.println(c.getName());
-				String nextCity = c.getList().getFirst().getName();
-				for(Vertices v : c.getList()) {
-					System.out.println(v.getName());
+			for(int i = 0; i <= 6; i++) {
+				String verticeAnterior = c.getName(); // aqui ele vai pegar o nome da cidade/vertice para retirar da proxima lista
+				System.out.println();
+				System.out.println("Cidade: "+ c.getName());
+				for (Vertices v : c.getList()) {
+					System.out.print(v.getName() + "-" + v.getDistance() + " ");
 				}
-				c.removeList(c.getList().getFirst());
-				if(c.getList().isEmpty()) {
-					map.remove(c);
-				}
-				c = map.get(nextCity);		
+				c = map.get(c.getVertice(c.getList().getFirst().getName()).getName());
+				c.removeList(c.getVertice(verticeAnterior));
 			}
 
 		} catch (Exception e) {
