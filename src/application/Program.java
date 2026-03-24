@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Scanner;
 
 import entities.Cities;
@@ -15,7 +17,7 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		try {
 			Map<String, Cities> map = readArchive(); // metodo para ler o arquivo e retornar uma lista
-
+			Queue<Cities> fila = new LinkedList<>();
 			System.out.println();
 			System.out.println("Escreva a cidade de PARTIDA: ");
 			String partida = sc.next();
@@ -24,16 +26,20 @@ public class Program {
 			System.out.println();
 			
 			Cities c = map.get(partida);
-			
-			for(int i = 0; i <= 6; i++) {
-				String verticeAnterior = c.getName(); // aqui ele vai pegar o nome da cidade/vertice para retirar da proxima lista
+			fila.add(c);
+			while(!fila.isEmpty()) {
+				Cities city = fila.poll();
 				System.out.println();
-				System.out.println("Cidade: "+ c.getName());
-				for (Vertices v : c.getList()) {
-					System.out.print(v.getName() + "-" + v.getDistance() + " ");
+				System.out.println(city.getName());
+				for(Vertices v : city.getList()) {
+					if(!v.getTeste()) {
+						System.out.print(v.getName() + " ");
+						if(city.getName() != v.getName()) {
+							fila.add(map.get(v.getName()));
+						}		
+						v.setTeste(true);
+					}		
 				}
-				c = map.get(c.getVertice(c.getList().getFirst().getName()).getName());
-				c.removeList(c.getVertice(verticeAnterior));
 			}
 
 		} catch (Exception e) {

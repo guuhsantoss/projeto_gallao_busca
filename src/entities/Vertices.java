@@ -3,7 +3,7 @@ package entities;
 public class Vertices {
 	private String name;
 	private Integer distance;
-	private Boolean teste;
+	private Boolean teste = false;
 	
 	public Vertices(String name, Integer distance) {
 		this.name = name;
